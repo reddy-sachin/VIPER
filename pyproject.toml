@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "viper"
+version = "1.0.0"
+description = "VIPER: equatorial vertical plasma drift predictions from JPL GIM TEC"
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [{ name = "Sachin A. Reddy" }]
+dependencies = [
+    "numpy",
+    "pandas",
+    "xarray",
+    "netCDF4",
+    "requests",
+    "apexpy",
+    "lmfit",
+    "torch",
+    "scikit-learn>=1.3",  # scaler was pickled with 1.3.0; newer versions load it with a warning
+    "matplotlib",
+    "huggingface_hub",  # model, weights and scaler live at huggingface.co/reddysachin/VIPER
+]
+
+[project.optional-dependencies]
+maps = ["cartopy"]  # coastlines on the world map
+
+[project.scripts]
+viper = "viper.cli:main"
+
+[tool.setuptools]
+packages = ["viper"]
